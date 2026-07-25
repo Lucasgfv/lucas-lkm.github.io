@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lucas Gabriel — Software Engineer specializing in JavaScript, React, TypeScript, Python and SQL.">
+  <meta name="theme-color" content="#f4f4f0">
+  <meta property="og:title" content="Lucas Gabriel — Software Engineer">
+  <meta property="og:description" content="Clean, scalable web applications and digital solutions built with JavaScript and Python.">
+  <meta property="og:type" content="website">
+  <title>Lucas Gabriel — Software Engineer</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23121212'/%3E%3Cpath d='M18 16v22c0 7 4 11 11 11h4' fill='none' stroke='%23fff' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M45 21c-2-4-6-6-11-6-8 0-13 7-13 17s5 17 13 17c5 0 9-2 12-5V32H34' fill='none' stroke='%23fff' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Space Grotesk"', 'Arial', 'sans-serif'],
+          },
+          colors: {
+            canvas: '#f4f4f0',
+            ink: '#121212',
+            line: '#d8d8d2',
+            muted: '#666660',
+            signal: '#10c878',
+          },
+          boxShadow: {
+            soft: '0 18px 48px rgba(18, 18, 18, 0.08)',
+            pill: '0 8px 20px rgba(18, 18, 18, 0.14)',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <style>
+    :root {
+      --canvas: #f4f4f0;
+      --ink: #121212;
+      --line: #d8d8d2;
+      --muted: #666660;
+      --signal: #10c878;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 84px;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: "Space Grotesk", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    ::selection {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--signal);
+      outline-offset: 4px;
+    }
+
+    .site-shell {
+      width: min(100% - 40px, 1320px);
+      margin-inline: auto;
+    }
+
+    .hero-name {
+      font-size: clamp(4.75rem, 9.6vw, 9.25rem);
+      line-height: 0.82;
+      letter-spacing: -0.075em;
+      white-space: nowrap;
+    }
+
+    .outline-word {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--ink);
+      text-stroke: 2px var(--ink);
+    }
+
+    .hero-photo-frame {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      z-index: 10;
+      width: min(41vw, 520px);
+      height: 505px;
+      transform: translateX(-50%);
+      overflow: hidden;
+      border-radius: 46% 46% 0 0 / 25% 25% 0 0;
+      background: #dbdce0;
+      box-shadow: 0 0 0 1px rgba(18, 18, 18, 0.08);
+    }
+
+    .hero-photo-frame::after {
+      position: absolute;
+      inset: auto 0 0;
+      height: 12px;
+      background: var(--ink);
+      content: "";
+    }
+
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(0.16) contrast(1.02);
+    }
+
+    .watermark {
+      position: absolute;
+      top: 62px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(5rem, 10vw, 9.5rem);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.07em;
+      color: rgba(18, 18, 18, 0.025);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .watermark-dark {
+      color: rgba(255, 255, 255, 0.035);
+    }
+
+    .project-visual {
+      position: relative;
+      min-height: 310px;
+      overflow: hidden;
+      border: 1px solid rgba(18, 18, 18, 0.1);
+      border-radius: 20px;
+      background: #e8e8e3;
+    }
+
+    .project-visual > .visual-inner {
+      width: 100%;
+      height: 100%;
+      min-height: 310px;
+      transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .project-card:hover .visual-inner {
+      transform: scale(1.035);
+    }
+
+    .project-card {
+      transition: opacity 240ms ease, transform 240ms ease;
+    }
+
+    .project-card.is-filtered {
+      display: none;
+    }
+
+    .mock-window-dots span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .service-panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .service-panel > div {
+      overflow: hidden;
+    }
+
+    .service-item.is-open .service-panel {
+      grid-template-rows: 1fr;
+    }
+
+    .service-item.is-open {
+      border-color: #222;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 18px 42px rgba(18, 18, 18, 0.16);
+    }
+
+    .service-item.is-open .service-copy,
+    .service-item.is-open .service-index {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .service-item.is-open .service-icon {
+      transform: rotate(45deg);
+    }
+
+    .service-icon {
+      transition: transform 300ms ease;
+    }
+
+    .experience-row {
+      transition: background-color 220ms ease, padding 220ms ease;
+    }
+
+    .experience-row:hover {
+      padding-inline: 20px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-menu {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 220ms ease, transform 220ms ease, visibility 220ms;
+    }
+
+    .mobile-menu.is-open {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1023px) {
+      .hero-name {
+        font-size: clamp(4.35rem, 11.6vw, 7.25rem);
+      }
+
+      .hero-photo-frame {
+        width: min(56vw, 480px);
+        height: 475px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .site-shell {
+        width: min(100% - 28px, 1320px);
+      }
+
+      .hero-name {
+        white-space: normal;
+      }
+
+      .hero-photo-frame {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        width: min(100%, 430px);
+        height: 430px;
+        margin: 24px auto 0;
+        transform: none;
+      }
+
+      .project-visual,
+      .project-visual > .visual-inner {
+        min-height: 260px;
+      }
+
+      .experience-row:hover {
+        padding-inline: 0;
+        background: transparent;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main-content" class="fixed left-4 top-4 z-[100] -translate-y-24 rounded-full bg-ink px-5 py-3 text-sm font-medium text-white transition focus:translate-y-0">
+    Skip to content
+  </a>
+
+  <header class="sticky top-0 z-50 border-b border-black/[0.06] bg-canvas/95 backdrop-blur-md">
+    <div class="site-shell flex h-[78px] items-center justify-between">
+      <a href="#top" class="inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-black/10 bg-white/70 px-4 py-2 text-xs font-medium shadow-sm transition hover:bg-white" aria-label="Back to the top">
+        <span class="h-2 w-2 rounded-full bg-signal shadow-[0_0_0_4px_rgba(16,200,120,0.12)]"></span>
+        <span class="hidden sm:inline">Available for New Projects</span>
+        <span class="sm:hidden">Available</span>
+      </a>
+
+      <nav class="hidden items-center gap-8 lg:flex" aria-label="Primary navigation">
+        <a href="#work" class="group text-xs font-medium">
+          Work <span class="ml-1 text-black/35 transition group-hover:text-black">[04]</span>
+        </a>
+        <a href="#services" class="group text-xs font-medium">
+          Services <span class="ml-1 text-black/35 transition group-hover:text-black">[04]</span>
+        </a>
+        <a href="#experience" class="group text-xs font-medium">
+          Experience <span class="ml-1 text-black/35 transition group-hover:text-black">[03]</span>
+        </a>
+        <a href="#contact" class="text-xs font-medium">Contact</a>
+      </nav>
+
+      <a href="#contact" class="hidden items-center gap-2 whitespace-nowrap rounded-full bg-ink px-5 py-3 text-xs font-medium text-white shadow-pill transition hover:-translate-y-0.5 lg:inline-flex">
+        Let's Talk
+        <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+      </a>
+
+      <button id="menu-toggle" type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white/70 lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+        <i data-lucide="menu" class="menu-open-icon h-5 w-5" aria-hidden="true"></i>
+        <i data-lucide="x" class="menu-close-icon hidden h-5 w-5" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="mobile-menu absolute inset-x-0 top-[78px] border-b border-black/10 bg-canvas p-4 lg:hidden">
+      <nav class="site-shell flex flex-col py-2" aria-label="Mobile navigation">
+        <a href="#work" class="mobile-nav-link flex items-center justify-between border-b border-line py-5 text-2xl font-medium">
+          Work <span class="text-sm text-black/35">[04]</span>
+        </a>
+        <a href="#services" class="mobile-nav-link flex items-center justify-between border-b border-line py-5 text-2xl font-medium">
+          Services <span class="text-sm text-black/35">[04]</span>
+        </a>
+        <a href="#experience" class="mobile-nav-link flex items-center justify-between border-b border-line py-5 text-2xl font-medium">
+          Experience <span class="text-sm text-black/35">[03]</span>
+        </a>
+        <a href="#contact" class="mobile-nav-link flex items-center justify-between py-5 text-2xl font-medium">
+          Contact <i data-lucide="arrow-down-right" class="h-5 w-5" aria-hidden="true"></i>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section id="top" class="relative overflow-hidden border-b border-black/[0.06] bg-canvas">
+      <div class="site-shell relative min-h-[730px] pb-0 pt-20 md:min-h-[790px] md:pt-24">
+        <h1 class="hero-name relative z-20 text-center font-bold uppercase" aria-label="Lucas Gabriel">
+          <span class="outline-word">Lucas</span>
+          <span class="text-ink">Gabriel</span>
+        </h1>
+
+        <div class="hero-photo-frame">
+          <img
+            class="hero-photo"
+            src="data:image/webp;base64,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"
+            alt="Professional portrait of Lucas Gabriel"
+            width="560"
+            height="566"
+            decoding="async"
+            fetchpriority="high"
+          >
+        </div>
+
+        <div class="relative z-30 mt-10 grid gap-9 md:absolute md:inset-x-0 md:bottom-16 md:mt-0 md:grid-cols-[1fr_1fr] md:items-end">
+          <div class="max-w-[370px] md:pr-8">
+            <p class="mb-3 text-[clamp(1.35rem,2vw,2rem)] font-semibold leading-tight">Software Engineer |<br class="hidden sm:block"> JavaScript &amp; Python</p>
+            <p class="max-w-[355px] text-sm leading-6 text-muted">
+              Passionate about software development, focusing on JavaScript, React, TypeScript, Python, and SQL. Dedicated to building clean, scalable web applications and solutions.
+            </p>
+            <a href="#contact" class="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-white shadow-pill transition hover:-translate-y-0.5">
+              Let's collaborate
+              <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <div class="hidden justify-self-end md:flex md:flex-col md:items-stretch md:gap-3">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex min-w-[132px] items-center gap-3 rounded-full border border-black/10 bg-white/70 px-4 py-2.5 text-xs font-medium transition hover:border-black hover:bg-white">
+              <i data-lucide="github" class="h-4 w-4" aria-hidden="true"></i>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/lucas-lkm" target="_blank" rel="noopener noreferrer" class="inline-flex min-w-[132px] items-center gap-3 rounded-full border border-black/10 bg-white/70 px-4 py-2.5 text-xs font-medium transition hover:border-black hover:bg-white">
+              <i data-lucide="linkedin" class="h-4 w-4" aria-hidden="true"></i>
+              LinkedIn
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="inline-flex min-w-[132px] items-center gap-3 rounded-full border border-black/10 bg-white/70 px-4 py-2.5 text-xs font-medium transition hover:border-black hover:bg-white">
+              <i data-lucide="instagram" class="h-4 w-4" aria-hidden="true"></i>
+              Instagram
+            </a>
+            <!-- Add the verified Gmail address after "mailto:" before publishing. -->
+            <a href="mailto:?subject=Website%20project%20for%20Lucas%20Gabriel" class="email-link inline-flex min-w-[132px] items-center gap-3 rounded-full border border-black/10 bg-white/70 px-4 py-2.5 text-xs font-medium transition hover:border-black hover:bg-white">
+              <i data-lucide="mail" class="h-4 w-4" aria-hidden="true"></i>
+              Gmail
+            </a>
+          </div>
+        </div>
+
+        <div class="relative z-30 mt-7 flex flex-wrap gap-2 pb-8 md:hidden">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2.5 text-xs font-medium">
+            <i data-lucide="github" class="h-4 w-4" aria-hidden="true"></i> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/lucas-lkm" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2.5 text-xs font-medium">
+            <i data-lucide="linkedin" class="h-4 w-4" aria-hidden="true"></i> LinkedIn
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2.5 text-xs font-medium">
+            <i data-lucide="instagram" class="h-4 w-4" aria-hidden="true"></i> Instagram
+          </a>
+          <a href="mailto:?subject=Website%20project%20for%20Lucas%20Gabriel" class="email-link inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2.5 text-xs font-medium">
+            <i data-lucide="mail" class="h-4 w-4" aria-hidden="true"></i> Gmail
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="relative overflow-hidden bg-canvas py-28 sm:py-36">
+      <div class="watermark" aria-hidden="true">PORTFOLIO</div>
+      <div class="site-shell relative z-10">
+        <div class="reveal text-center">
+          <p class="text-[clamp(2.7rem,5vw,5rem)] font-medium leading-none tracking-[-0.065em]">/SELECTED WORK</p>
+          <p class="mx-auto mt-5 max-w-xl text-sm leading-6 text-muted">
+            A selection of product ideas shaped around useful interfaces, reliable backends, and thoughtful automation.
+          </p>
+        </div>
+
+        <div class="reveal mt-16 flex flex-col gap-5 border-b border-line pb-5 sm:flex-row sm:items-center sm:justify-between">
+          <div class="flex flex-wrap gap-2" role="group" aria-label="Filter projects">
+            <button type="button" class="filter-btn rounded-full bg-ink px-4 py-2 text-xs font-medium text-white" data-filter="all" aria-pressed="true">
+              All Projects
+            </button>
+            <button type="button" class="filter-btn rounded-full border border-black/10 px-4 py-2 text-xs font-medium transition hover:border-black" data-filter="ai" aria-pressed="false">
+              AI Powered
+            </button>
+            <button type="button" class="filter-btn rounded-full border border-black/10 px-4 py-2 text-xs font-medium transition hover:border-black" data-filter="classic" aria-pressed="false">
+              Classic Dev
+            </button>
+          </div>
+          <p id="project-count" class="text-xs font-medium text-muted" aria-live="polite">Showing 04 projects</p>
+        </div>
+
+        <div id="project-grid" class="mt-8 grid gap-x-8 gap-y-14 lg:grid-cols-2">
+          <article class="project-card reveal" data-category="ai">
+            <div class="project-visual bg-[#171719]">
+              <div class="visual-inner flex flex-col bg-[#171719] p-5 text-white sm:p-7">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                  <div class="flex items-center gap-2">
+                    <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-white text-[10px] font-bold text-black">AI</span>
+                    <span class="text-xs font-medium">PromptFlow</span>
+                  </div>
+                  <div class="mock-window-dots flex gap-1.5" aria-hidden="true"><span></span><span></span><span></span></div>
+                </div>
+                <div class="grid flex-1 grid-cols-[0.34fr_1fr] gap-4 pt-5">
+                  <div class="rounded-xl border border-white/10 bg-white/[0.035] p-3">
+                    <div class="mb-5 h-2 w-16 rounded-full bg-white/40"></div>
+                    <div class="space-y-3">
+                      <div class="h-2 rounded-full bg-white/10"></div>
+                      <div class="h-2 w-4/5 rounded-full bg-white/10"></div>
+                      <div class="h-2 w-3/5 rounded-full bg-white/10"></div>
+                    </div>
+                    <div class="mt-10 rounded-lg border border-[#a788ff]/30 bg-[#a788ff]/10 p-3">
+                      <i data-lucide="sparkles" class="mb-2 h-4 w-4 text-[#b9a4ff]" aria-hidden="true"></i>
+                      <div class="h-2 rounded-full bg-[#b9a4ff]/40"></div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col rounded-xl border border-white/10 bg-white/[0.035] p-4">
+                    <p class="text-[10px] uppercase tracking-[0.18em] text-white/40">AI Workspace</p>
+                    <p class="mt-2 max-w-[260px] text-lg font-medium leading-tight">Turn an idea into a clear technical plan.</p>
+                    <div class="mt-auto space-y-2.5">
+                      <div class="ml-auto w-[78%] rounded-xl bg-white p-3 text-[10px] leading-4 text-black">Build a reliable support workflow for a growing SaaS product.</div>
+                      <div class="w-[88%] rounded-xl border border-white/10 bg-white/[0.06] p-3 text-[10px] leading-4 text-white/70">Here is a structured architecture, data model, and delivery sequence...</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-[10px] font-semibold tracking-[0.14em]">AI PROJECT</span>
+              <span class="text-xs text-muted">01 / 04</span>
+            </div>
+            <h2 class="mt-4 text-[clamp(1.5rem,2.5vw,2.15rem)] font-medium leading-tight tracking-[-0.035em]">PromptFlow — AI project planning workspace</h2>
+            <p class="mt-3 max-w-xl text-sm leading-6 text-muted">A focused interface for transforming a rough product idea into scopes, tasks, and reusable engineering prompts.</p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">React</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">TypeScript</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">OpenAI API</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">SQL</span>
+            </div>
+            <div class="mt-6 flex flex-wrap gap-5 border-t border-line pt-5 text-sm font-medium">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:underline">Live Demo <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i></a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:underline">Source Code <i data-lucide="github" class="h-4 w-4" aria-hidden="true"></i></a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="classic">
+            <div class="project-visual bg-[#e8e7e2]">
+              <div class="visual-inner p-5 sm:p-7">
+                <div class="h-full rounded-2xl border border-black/10 bg-[#fafaf7] p-4 shadow-soft">
+                  <div class="flex items-center justify-between border-b border-black/10 pb-3">
+                    <span class="text-xs font-semibold tracking-[-0.02em]">Atelier.</span>
+                    <div class="flex gap-4 text-[8px] uppercase tracking-[0.14em] text-black/50">
+                      <span>Shop</span><span>Journal</span><span>Cart 02</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-[1.15fr_0.85fr] gap-4 pt-4">
+                    <div class="flex min-h-[215px] flex-col justify-end rounded-xl bg-[#20201f] p-5 text-white">
+                      <p class="max-w-[210px] text-2xl font-medium leading-none tracking-[-0.05em]">Objects made for quieter spaces.</p>
+                      <span class="mt-4 w-max rounded-full border border-white/25 px-3 py-1.5 text-[9px]">Explore collection</span>
+                    </div>
+                    <div class="grid gap-3">
+                      <div class="relative overflow-hidden rounded-xl bg-[#d6c7b5]">
+                        <div class="absolute bottom-4 left-1/2 h-20 w-20 -translate-x-1/2 rounded-[50%_50%_44%_44%] bg-[#292622] shadow-[0_15px_20px_rgba(0,0,0,0.2)]"></div>
+                      </div>
+                      <div class="rounded-xl border border-black/10 p-3">
+                        <p class="text-[9px] uppercase tracking-[0.12em] text-black/45">Featured</p>
+                        <p class="mt-1 text-sm font-medium">Stoneware set</p>
+                        <div class="mt-3 flex items-center justify-between text-[9px]"><span>$89.00</span><span>View ↗</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-[10px] font-semibold tracking-[0.14em]">DEVELOPMENT</span>
+              <span class="text-xs text-muted">02 / 04</span>
+            </div>
+            <h2 class="mt-4 text-[clamp(1.5rem,2.5vw,2.15rem)] font-medium leading-tight tracking-[-0.035em]">Atelier — Modern commerce experience</h2>
+            <p class="mt-3 max-w-xl text-sm leading-6 text-muted">A responsive storefront concept with product discovery, a clear purchase path, and a restrained editorial interface.</p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">JavaScript</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">React</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">Node.js</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">SQL</span>
+            </div>
+            <div class="mt-6 flex flex-wrap gap-5 border-t border-line pt-5 text-sm font-medium">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:underline">Live Demo <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i></a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:underline">Source Code <i data-lucide="github" class="h-4 w-4" aria-hidden="true"></i></a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="ai">
+            <div class="project-visual bg-[#dfe2e5]">
+              <div class="visual-inner flex items-center justify-center p-5 sm:p-7">
+                <div class="w-full rounded-2xl bg-[#111214] p-5 text-white shadow-soft">
+                  <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                    <div>
+                      <p class="text-[10px] uppercase tracking-[0.16em] text-white/40">Document intelligence</p>
+                      <p class="mt-1 text-sm font-medium">Insight / Q3-review.pdf</p>
+                    </div>
+                    <span class="rounded-full bg-signal/15 px-3 py-1.5 text-[9px] font-medium text-[#5ce4aa]">Analysis ready</span>
+                  </div>
+                  <div class="grid grid-cols-[0.9fr_1.1fr] gap-4 pt-4">
+                    <div class="rounded-xl bg-white p-4 text-black">
+                      <div class="mb-3 h-2 w-2/3 rounded bg-black/20"></div>
+                      <div class="space-y-2">
+                        <div class="h-1.5 rounded bg-black/10"></div>
+                        <div class="h-1.5 rounded bg-black/10"></div>
+                        <div class="h-1.5 w-5/6 rounded bg-black/10"></div>
+                      </div>
+                      <div class="mt-5 rounded border border-[#f0aa76] bg-[#fff2e8] p-3">
+                        <div class="h-1.5 w-1/2 rounded bg-[#e28c4d]/50"></div>
+                        <div class="mt-2 h-1.5 rounded bg-[#e28c4d]/25"></div>
+                      </div>
+                      <div class="mt-4 space-y-2">
+                        <div class="h-1.5 rounded bg-black/10"></div>
+                        <div class="h-1.5 w-4/5 rounded bg-black/10"></div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                      <div class="rounded-xl border border-white/10 bg-white/[0.05] p-4">
+                        <p class="text-[9px] uppercase tracking-[0.15em] text-white/35">Executive summary</p>
+                        <p class="mt-2 text-xs leading-5 text-white/70">Revenue movement, operating risks, and three recommended actions extracted from the report.</p>
+                      </div>
+                      <div class="grid flex-1 grid-cols-2 gap-3">
+                        <div class="rounded-xl border border-white/10 p-3">
+                          <p class="text-[9px] text-white/35">Confidence</p>
+                          <p class="mt-3 text-2xl font-medium">94%</p>
+                        </div>
+                        <div class="rounded-xl border border-white/10 p-3">
+                          <p class="text-[9px] text-white/35">Key findings</p>
+                          <p class="mt-3 text-2xl font-medium">08</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-[10px] font-semibold tracking-[0.14em]">AI PROJECT</span>
+              <span class="text-xs text-muted">03 / 04</span>
+            </div>
+            <h2 class="mt-4 text-[clamp(1.5rem,2.5vw,2.15rem)] font-medium leading-tight tracking-[-0.035em]">Insight — Intelligent document analysis</h2>
+            <p class="mt-3 max-w-xl text-sm leading-6 text-muted">A Python-powered workspace that turns long documents into structured summaries, findings, and searchable context.</p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">Python</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">OpenAI API</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">FastAPI</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">React</span>
+            </div>
+            <div class="mt-6 flex flex-wrap gap-5 border-t border-line pt-5 text-sm font-medium">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:underline">Live Demo <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i></a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:underline">Source Code <i data-lucide="github" class="h-4 w-4" aria-hidden="true"></i></a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="classic">
+            <div class="project-visual bg-[#e7e9ec]">
+              <div class="visual-inner flex items-center justify-center p-5 sm:p-7">
+                <div class="w-full overflow-hidden rounded-2xl border border-black/10 bg-[#f8f9fb] shadow-soft">
+                  <div class="flex items-center justify-between border-b border-black/10 bg-white px-5 py-3">
+                    <div class="flex items-center gap-2">
+                      <span class="flex h-6 w-6 items-center justify-center rounded-md bg-[#315bf4] text-[9px] font-bold text-white">A</span>
+                      <span class="text-xs font-semibold">Automate</span>
+                    </div>
+                    <span class="rounded-full border border-black/10 px-2.5 py-1 text-[8px]">Run workflow</span>
+                  </div>
+                  <div class="grid min-h-[238px] grid-cols-[0.65fr_1fr]">
+                    <div class="border-r border-black/10 p-4">
+                      <p class="text-[9px] uppercase tracking-[0.14em] text-black/40">Flows</p>
+                      <div class="mt-4 space-y-2">
+                        <div class="rounded-lg bg-[#315bf4] px-3 py-2.5 text-[9px] text-white">New lead intake</div>
+                        <div class="rounded-lg border border-black/10 px-3 py-2.5 text-[9px]">Invoice reminder</div>
+                        <div class="rounded-lg border border-black/10 px-3 py-2.5 text-[9px]">Daily export</div>
+                      </div>
+                    </div>
+                    <div class="relative flex items-center justify-center p-6">
+                      <div class="absolute h-px w-[65%] bg-black/15"></div>
+                      <div class="relative z-10 flex w-full items-center justify-between">
+                        <div class="rounded-xl border border-black/10 bg-white p-3 shadow-sm">
+                          <i data-lucide="webhook" class="h-5 w-5 text-[#315bf4]" aria-hidden="true"></i>
+                          <p class="mt-2 text-[9px] font-medium">Webhook</p>
+                        </div>
+                        <div class="rounded-xl border border-black/10 bg-white p-3 shadow-sm">
+                          <i data-lucide="braces" class="h-5 w-5 text-[#315bf4]" aria-hidden="true"></i>
+                          <p class="mt-2 text-[9px] font-medium">Transform</p>
+                        </div>
+                        <div class="rounded-xl border border-black/10 bg-white p-3 shadow-sm">
+                          <i data-lucide="database" class="h-5 w-5 text-[#315bf4]" aria-hidden="true"></i>
+                          <p class="mt-2 text-[9px] font-medium">Store</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-[10px] font-semibold tracking-[0.14em]">DEVELOPMENT</span>
+              <span class="text-xs text-muted">04 / 04</span>
+            </div>
+            <h2 class="mt-4 text-[clamp(1.5rem,2.5vw,2.15rem)] font-medium leading-tight tracking-[-0.035em]">Automate — API workflow builder</h2>
+            <p class="mt-3 max-w-xl text-sm leading-6 text-muted">A visual tool for connecting services, transforming payloads, and monitoring routine business processes.</p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">JavaScript</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">Node.js</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">REST API</span>
+              <span class="rounded-full border border-black/10 px-3 py-1.5 text-xs">PostgreSQL</span>
+            </div>
+            <div class="mt-6 flex flex-wrap gap-5 border-t border-line pt-5 text-sm font-medium">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:underline">Live Demo <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i></a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 hover:underline">Source Code <i data-lucide="github" class="h-4 w-4" aria-hidden="true"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="relative overflow-hidden border-t border-black/[0.06] bg-[#f7f7f4] py-28 sm:py-36">
+      <div class="watermark !left-[8%] !translate-x-0" aria-hidden="true">SERVICE</div>
+      <div class="site-shell relative z-10">
+        <div class="reveal grid gap-6 lg:grid-cols-[0.7fr_1fr] lg:items-end">
+          <p class="text-[clamp(2.7rem,5vw,5rem)] font-medium leading-none tracking-[-0.065em]">/SERVICE</p>
+          <p class="max-w-xl text-sm leading-6 text-muted lg:justify-self-end">
+            Digital products built for clients who need a clear launch, a dependable application, or a stronger web presence.
+          </p>
+        </div>
+
+        <div class="mt-16 space-y-3">
+          <article class="service-item is-open reveal overflow-hidden rounded-2xl border border-black/10 transition-colors duration-300">
+            <button type="button" class="service-toggle flex w-full items-center gap-4 px-5 py-6 text-left sm:px-8 sm:py-8" aria-expanded="true">
+              <span class="service-index w-8 shrink-0 text-xs text-muted">01</span>
+              <span class="flex-1">
+                <span class="block text-[clamp(1.45rem,3.2vw,3.1rem)] font-medium leading-tight tracking-[-0.05em]">FULL-STACK WEB DEVELOPMENT</span>
+                <span class="service-copy mt-2 block text-sm text-muted">Custom websites, web apps, React, Node and Python solutions.</span>
+              </span>
+              <i data-lucide="plus" class="service-icon h-6 w-6 shrink-0" aria-hidden="true"></i>
+            </button>
+            <div class="service-panel">
+              <div>
+                <div class="grid gap-6 border-t border-white/10 px-5 pb-7 pt-6 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-end">
+                  <p class="max-w-2xl text-sm leading-6 text-white/65">From interface and accessibility through APIs and data, I can shape and deliver a complete product with a clean, maintainable foundation.</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">React</span>
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">Node.js</span>
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">Python</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-item reveal overflow-hidden rounded-2xl border border-black/10 transition-colors duration-300">
+            <button type="button" class="service-toggle flex w-full items-center gap-4 px-5 py-6 text-left sm:px-8 sm:py-8" aria-expanded="false">
+              <span class="service-index w-8 shrink-0 text-xs text-muted">02</span>
+              <span class="flex-1">
+                <span class="block text-[clamp(1.45rem,3.2vw,3.1rem)] font-medium leading-tight tracking-[-0.05em]">E-COMMERCE &amp; LANDING PAGES</span>
+                <span class="service-copy mt-2 block text-sm text-muted">Responsive experiences designed for clarity and business growth.</span>
+              </span>
+              <i data-lucide="plus" class="service-icon h-6 w-6 shrink-0" aria-hidden="true"></i>
+            </button>
+            <div class="service-panel">
+              <div>
+                <div class="grid gap-6 border-t border-white/10 px-5 pb-7 pt-6 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-end">
+                  <p class="max-w-2xl text-sm leading-6 text-white/65">Fast, persuasive pages with responsive layouts, focused messaging, clear calls to action, and frictionless purchase journeys.</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">Conversion</span>
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">Responsive</span>
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">Checkout</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-item reveal overflow-hidden rounded-2xl border border-black/10 transition-colors duration-300">
+            <button type="button" class="service-toggle flex w-full items-center gap-4 px-5 py-6 text-left sm:px-8 sm:py-8" aria-expanded="false">
+              <span class="service-index w-8 shrink-0 text-xs text-muted">03</span>
+              <span class="flex-1">
+                <span class="block text-[clamp(1.45rem,3.2vw,3.1rem)] font-medium leading-tight tracking-[-0.05em]">API &amp; AUTOMATION INTEGRATION</span>
+                <span class="service-copy mt-2 block text-sm text-muted">Python scripts, REST APIs, backend systems, and connected workflows.</span>
+              </span>
+              <i data-lucide="plus" class="service-icon h-6 w-6 shrink-0" aria-hidden="true"></i>
+            </button>
+            <div class="service-panel">
+              <div>
+                <div class="grid gap-6 border-t border-white/10 px-5 pb-7 pt-6 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-end">
+                  <p class="max-w-2xl text-sm leading-6 text-white/65">Connect the tools you already use, remove repetitive work, and build reliable service layers that are easy to understand and operate.</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">Python</span>
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">REST API</span>
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">Webhooks</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-item reveal overflow-hidden rounded-2xl border border-black/10 transition-colors duration-300">
+            <button type="button" class="service-toggle flex w-full items-center gap-4 px-5 py-6 text-left sm:px-8 sm:py-8" aria-expanded="false">
+              <span class="service-index w-8 shrink-0 text-xs text-muted">04</span>
+              <span class="flex-1">
+                <span class="block text-[clamp(1.45rem,3.2vw,3.1rem)] font-medium leading-tight tracking-[-0.05em]">MAINTENANCE &amp; OPTIMIZATION</span>
+                <span class="service-copy mt-2 block text-sm text-muted">SEO, performance tuning, bug fixes, and hosting setup.</span>
+              </span>
+              <i data-lucide="plus" class="service-icon h-6 w-6 shrink-0" aria-hidden="true"></i>
+            </button>
+            <div class="service-panel">
+              <div>
+                <div class="grid gap-6 border-t border-white/10 px-5 pb-7 pt-6 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-end">
+                  <p class="max-w-2xl text-sm leading-6 text-white/65">Keep your site fast, discoverable, secure, and easy to deploy—from focused fixes through ongoing technical care.</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">SEO</span>
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">Performance</span>
+                    <span class="rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70">Hosting</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="relative overflow-hidden bg-ink py-28 text-white sm:py-36">
+      <div class="watermark watermark-dark !top-8" aria-hidden="true">ENGINEERING</div>
+      <div class="site-shell relative z-10">
+        <div class="reveal grid gap-8 border-b border-white/15 pb-12 lg:grid-cols-[1fr_0.9fr] lg:items-end">
+          <div>
+            <p class="text-[clamp(2.7rem,5vw,5rem)] font-medium leading-none tracking-[-0.065em]">/EXPERIENCE</p>
+            <p class="mt-5 max-w-lg text-sm leading-6 text-white/55">Professional experience supported by a Bachelor’s degree in Software Engineering and a background as an Analyst and Developer.</p>
+          </div>
+          <div class="lg:justify-self-end lg:text-right">
+            <p class="text-xs uppercase tracking-[0.18em] text-white/35">Academic background</p>
+            <p class="mt-2 text-lg font-medium">Bacharelado em Engenharia de Software</p>
+            <p class="mt-1 text-sm text-white/55">Analista e Desenvolvedor</p>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <article class="experience-row reveal grid gap-4 border-b border-white/15 py-8 md:grid-cols-[0.85fr_1.25fr_auto] md:items-center">
+            <div>
+              <p class="text-xl font-medium">AutContabil</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.15em] text-white/35">Finance &amp; administration</p>
+            </div>
+            <p class="text-sm text-white/65">Assistente Administrativo de Escritório</p>
+            <p class="text-sm text-white/45 md:text-right">Feb 2026 — Present</p>
+          </article>
+
+          <article class="experience-row reveal grid gap-4 border-b border-white/15 py-8 md:grid-cols-[0.85fr_1.25fr_auto] md:items-center">
+            <div>
+              <p class="text-xl font-medium">Protec Vigilância Eletrônica</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.15em] text-white/35">Operations &amp; technology</p>
+            </div>
+            <p class="text-sm text-white/65">Coordenação de Licitações / TI</p>
+            <p class="text-sm text-white/45 md:text-right">Jun 2023 — Mar 2025</p>
+          </article>
+
+          <article class="experience-row reveal grid gap-4 border-b border-white/15 py-8 md:grid-cols-[0.85fr_1.25fr_auto] md:items-center">
+            <div>
+              <p class="text-xl font-medium">Wtech Soluções</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.15em] text-white/35">IT support</p>
+            </div>
+            <p class="text-sm text-white/65">Técnico de Informática</p>
+            <p class="text-sm text-white/45 md:text-right">2021 — 2022</p>
+          </article>
+        </div>
+
+        <div class="reveal mt-16 grid gap-8 lg:grid-cols-[0.55fr_1fr]">
+          <div>
+            <p class="text-xs uppercase tracking-[0.18em] text-white/35">Licenses &amp; certificates</p>
+            <p class="mt-3 max-w-xs text-2xl font-medium leading-tight tracking-[-0.035em]">Validated learning across data and technology.</p>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <a href="https://www.credly.com/badges/1b8baf0a-097a-435f-b8af-493ba549211e" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between rounded-2xl border border-white/15 p-5 transition hover:bg-white hover:text-black">
+              <span>
+                <span class="block text-sm font-medium">IBM Data Analyst</span>
+                <span class="mt-1 block text-xs text-white/40 transition group-hover:text-black/50">IBM</span>
+              </span>
+              <i data-lucide="arrow-up-right" class="h-5 w-5" aria-hidden="true"></i>
+            </a>
+            <div class="flex items-center justify-between rounded-2xl border border-white/15 p-5">
+              <span>
+                <span class="block text-sm font-medium">Data Analyst Capstone</span>
+                <span class="mt-1 block text-xs text-white/40">Coursera · Nov 2025</span>
+              </span>
+              <i data-lucide="badge-check" class="h-5 w-5 text-signal" aria-hidden="true"></i>
+            </div>
+            <div class="flex items-center justify-between rounded-2xl border border-white/15 p-5">
+              <span>
+                <span class="block text-sm font-medium">Google IT Support</span>
+                <span class="mt-1 block text-xs text-white/40">Google</span>
+              </span>
+              <i data-lucide="badge-check" class="h-5 w-5 text-signal" aria-hidden="true"></i>
+            </div>
+            <div class="flex items-center justify-between rounded-2xl border border-white/15 p-5">
+              <span>
+                <span class="block text-sm font-medium">Google Cybersecurity</span>
+                <span class="mt-1 block text-xs text-white/40">Google</span>
+              </span>
+              <i data-lucide="badge-check" class="h-5 w-5 text-signal" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="relative overflow-hidden bg-[#f7f7f4] py-28 sm:py-36">
+      <div class="site-shell relative z-10 text-center">
+        <div class="reveal mx-auto inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-medium shadow-sm">
+          <span class="h-2 w-2 rounded-full bg-signal"></span>
+          Available for New Projects
+        </div>
+        <h2 class="reveal mx-auto mt-8 max-w-5xl text-[clamp(3.3rem,8vw,8rem)] font-semibold uppercase leading-[0.88] tracking-[-0.075em]">
+          Have a project in mind?
+          <span class="outline-word block">Want to hire me?</span>
+        </h2>
+        <p class="reveal mx-auto mt-8 max-w-2xl text-sm leading-6 text-muted">
+          Available for freelance website creation or full-time Software Engineer positions.
+        </p>
+        <a href="mailto:?subject=Website%20project%20for%20Lucas%20Gabriel" class="email-link reveal mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-medium text-white shadow-pill transition hover:-translate-y-0.5">
+          Contact Me
+          <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+        </a>
+
+        <div class="reveal mt-20 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <a href="mailto:?subject=Website%20project%20for%20Lucas%20Gabriel" class="email-link group flex items-center justify-between rounded-full border border-black/10 bg-white/60 px-5 py-4 text-sm font-medium transition hover:border-black hover:bg-white">
+            <span class="inline-flex items-center gap-3"><i data-lucide="mail" class="h-4 w-4" aria-hidden="true"></i> Gmail</span>
+            <i data-lucide="arrow-up-right" class="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true"></i>
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between rounded-full border border-black/10 bg-white/60 px-5 py-4 text-sm font-medium transition hover:border-black hover:bg-white">
+            <span class="inline-flex items-center gap-3"><i data-lucide="github" class="h-4 w-4" aria-hidden="true"></i> GitHub</span>
+            <i data-lucide="arrow-up-right" class="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/lucas-lkm" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between rounded-full border border-black/10 bg-white/60 px-5 py-4 text-sm font-medium transition hover:border-black hover:bg-white">
+            <span class="inline-flex items-center gap-3"><i data-lucide="linkedin" class="h-4 w-4" aria-hidden="true"></i> LinkedIn</span>
+            <i data-lucide="arrow-up-right" class="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between rounded-full border border-black/10 bg-white/60 px-5 py-4 text-sm font-medium transition hover:border-black hover:bg-white">
+            <span class="inline-flex items-center gap-3"><i data-lucide="instagram" class="h-4 w-4" aria-hidden="true"></i> Instagram</span>
+            <i data-lucide="arrow-up-right" class="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-black/10 bg-[#f7f7f4]">
+    <div class="site-shell flex flex-col gap-4 py-7 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+      <p>© 2026 Lucas Gabriel. Hosted on GitHub Pages.</p>
+      <a href="#top" class="inline-flex items-center gap-2 font-medium text-ink">
+        Back to top
+        <i data-lucide="arrow-up" class="h-4 w-4" aria-hidden="true"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) {
+        window.lucide.createIcons({ attrs: { 'stroke-width': 1.7 } });
+      }
+
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuOpenIcon = menuToggle.querySelector('.menu-open-icon');
+      const menuCloseIcon = menuToggle.querySelector('.menu-close-icon');
+
+      const setMenuState = (isOpen) => {
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        mobileMenu.classList.toggle('is-open', isOpen);
+        menuOpenIcon.classList.toggle('hidden', isOpen);
+        menuCloseIcon.classList.toggle('hidden', !isOpen);
+        document.body.classList.toggle('menu-open', isOpen);
+      };
+
+      menuToggle.addEventListener('click', () => {
+        setMenuState(menuToggle.getAttribute('aria-expanded') !== 'true');
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+        link.addEventListener('click', () => setMenuState(false));
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) setMenuState(false);
+      });
+
+      const filterButtons = [...document.querySelectorAll('.filter-btn')];
+      const projectCards = [...document.querySelectorAll('.project-card')];
+      const projectCount = document.getElementById('project-count');
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const filter = button.dataset.filter;
+
+          filterButtons.forEach((item) => {
+            const isActive = item === button;
+            item.setAttribute('aria-pressed', String(isActive));
+            item.classList.toggle('bg-ink', isActive);
+            item.classList.toggle('text-white', isActive);
+            item.classList.toggle('border', !isActive);
+            item.classList.toggle('border-black/10', !isActive);
+          });
+
+          let visibleCount = 0;
+          projectCards.forEach((card) => {
+            const shouldShow = filter === 'all' || card.dataset.category === filter;
+            card.classList.toggle('is-filtered', !shouldShow);
+            if (shouldShow) visibleCount += 1;
+          });
+
+          projectCount.textContent = `Showing ${String(visibleCount).padStart(2, '0')} ${visibleCount === 1 ? 'project' : 'projects'}`;
+        });
+      });
+
+      const serviceItems = [...document.querySelectorAll('.service-item')];
+      serviceItems.forEach((item) => {
+        const toggle = item.querySelector('.service-toggle');
+        toggle.addEventListener('click', () => {
+          const willOpen = !item.classList.contains('is-open');
+
+          serviceItems.forEach((service) => {
+            service.classList.remove('is-open');
+            service.querySelector('.service-toggle').setAttribute('aria-expanded', 'false');
+          });
+
+          if (willOpen) {
+            item.classList.add('is-open');
+            toggle.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealItems = document.querySelectorAll('.reveal');
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealItems.forEach((item) => item.classList.add('is-visible'));
+      } else {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        revealItems.forEach((item) => revealObserver.observe(item));
+      }
+    });
+  </script>
+</body>
+</html>
